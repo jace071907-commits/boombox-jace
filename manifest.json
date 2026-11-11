@@ -1,0 +1,109 @@
+{
+  "sounds": [
+    {
+      "file": "cheer.mp4",
+      "name": "Cheer",
+      "size": 56012
+    },
+    {
+      "file": "clap.mp4",
+      "name": "Clap",
+      "size": 60660
+    },
+    {
+      "file": "countdown.mp4",
+      "name": "Countdown",
+      "size": 38145
+    },
+    {
+      "file": "crowd laugh.mp4",
+      "name": "Crowd Laugh",
+      "size": 48440
+    },
+    {
+      "file": "descending failed loud.mp4",
+      "name": "Descending Failed Loud",
+      "size": 22910
+    },
+    {
+      "file": "descending failed.mp4",
+      "name": "Descending Failed",
+      "size": 23364
+    },
+    {
+      "file": "drum roll.mp4",
+      "name": "Drum Roll",
+      "size": 41859
+    },
+    {
+      "file": "evil laugh.mp4",
+      "name": "Evil Laugh",
+      "size": 55100
+    },
+    {
+      "file": "gentle.mp4",
+      "name": "Gentle",
+      "size": 75888
+    },
+    {
+      "file": "heartbeat.mp4",
+      "name": "Heartbeat",
+      "size": 117513
+    },
+    {
+      "file": "laugh full.mp4",
+      "name": "Laugh Full",
+      "size": 121229
+    },
+    {
+      "file": "laugh.mp4",
+      "name": "Laugh",
+      "size": 41042
+    },
+    {
+      "file": "loser.mp4",
+      "name": "Loser",
+      "size": 114635
+    },
+    {
+      "file": "soft crowd laugh.mp4",
+      "name": "Soft Crowd Laugh",
+      "size": 68162
+    },
+    {
+      "file": "studio laugh.mp4",
+      "name": "Studio Laugh",
+      "size": 56127
+    },
+    {
+      "file": "surprise.mp4",
+      "name": "Surprise",
+      "size": 37482
+    },
+    {
+      "file": "surprise2.mp4",
+      "name": "Surprise2",
+      "size": 24701
+    },
+    {
+      "file": "suspense.mp4",
+      "name": "Suspense",
+      "size": 73450
+    },
+    {
+      "file": "ticking time.mp4",
+      "name": "Ticking Time",
+      "size": 115362
+    },
+    {
+      "file": "wow.mp4",
+      "name": "Wow",
+      "size": 37970
+    },
+    {
+      "file": "wrong answer.mp4",
+      "name": "Wrong Answer",
+      "size": 77728
+    }
+  ]
+}
