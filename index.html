@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-accent="blue">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="JACE BOOM BOX - premium soundboard" />
+  <title>JACE BOOM BOX</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔊</text></svg>" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.dataset.theme = localStorage.getItem("jbb.theme") || "dark";
+      d.dataset.accent = localStorage.getItem("jbb.accent") || "blue";
+    })();
+  </script>
+</head>
+<body>
+  <div class="app">
+    <!-- ================= HEADER ================= -->
+    <header class="topbar panel">
+      <div class="brand">
+        <div class="brand-speaker" aria-hidden="true"><span></span></div>
+        <div>
+          <h1 class="brand-title">JACE <span>BOOM</span> BOX</h1>
+          <p class="brand-sub">Premium Sound Console</p>
+        </div>
+      </div>
+
+      <div class="topbar-controls">
+        <div class="accent-picker" role="radiogroup" aria-label="Theme color">
+          <button class="swatch" data-accent="blue" title="Blue" aria-label="Blue"></button>
+          <button class="swatch" data-accent="violet" title="Violet" aria-label="Violet"></button>
+          <button class="swatch" data-accent="green" title="Green" aria-label="Green"></button>
+          <button class="swatch" data-accent="orange" title="Orange" aria-label="Orange"></button>
+          <button class="swatch" data-accent="pink" title="Pink" aria-label="Pink"></button>
+          <button class="swatch" data-accent="grey" title="Grey" aria-label="Grey"></button>
+        </div>
+        <button id="themeToggle" class="toggle" aria-label="Toggle light / dark mode" title="Toggle light / dark mode">
+          <span class="toggle-track"><span class="toggle-knob"></span></span>
+          <span class="toggle-label" id="themeLabel">Dark</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ================= CONSOLE / NOW PLAYING ================= -->
+    <section class="console panel" aria-label="Now playing and quick controls">
+      <div class="lcd">
+        <div class="lcd-top">
+          <span class="lcd-tag">NOW PLAYING</span>
+          <span class="lcd-status" id="npStatus"><i class="led"></i><b>STOPPED</b></span>
+        </div>
+        <div class="lcd-title" id="npTitle">— Select a sound —</div>
+        <div class="lcd-file" id="npFile">&nbsp;</div>
+        <div class="lcd-progress">
+          <input type="range" id="npSeek" min="0" max="1000" value="0" step="1" aria-label="Seek" disabled />
+        </div>
+        <div class="lcd-time"><span id="npCurrent">00:00</span> / <span id="npDuration">00:00</span></div>
+      </div>
+
+      <div class="vu" aria-hidden="true">
+        <div class="vu-bars" id="vuBars"></div>
+        <span class="vu-label">LEVEL</span>
+      </div>
+
+      <div class="quick">
+        <div class="quick-buttons">
+          <button id="stopBtn" class="hw-btn hw-stop" title="Stop audio (Esc)">
+            <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+            <span>Stop</span>
+          </button>
+          <button id="muteBtn" class="hw-btn" title="Mute (M)" aria-pressed="false">
+            <svg class="ic-on" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg class="ic-off" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span id="muteLabel">Mute</span>
+          </button>
+        </div>
+        <div class="fader">
+          <label for="volume">Volume <output id="volumeOut">80%</output></label>
+          <input type="range" id="volume" min="0" max="100" value="80" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= AUDIO LIBRARY ================= -->
+    <section class="library panel" aria-labelledby="libTitle">
+      <div class="section-head">
+        <div>
+          <h2 id="libTitle">Audio Library</h2>
+          <p class="muted" id="libCount">Loading sounds…</p>
+        </div>
+        <div class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" id="search" placeholder="Search by name or filename…  ( / )" autocomplete="off" aria-label="Search sounds" />
+        </div>
+      </div>
+      <div class="grid" id="libraryGrid"></div>
+      <p class="empty" id="libraryEmpty" hidden></p>
+    </section>
+
+    <!-- ================= CUSTOM LISTS ================= -->
+    <section class="lists panel" aria-labelledby="listsTitle">
+      <div class="section-head">
+        <div>
+          <h2 id="listsTitle">My Sound Lists</h2>
+          <p class="muted" id="listsCount"></p>
+        </div>
+        <button id="createListBtn" class="hw-btn hw-accent">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <span>Create New List</span>
+        </button>
+      </div>
+      <div id="listsContainer" class="lists-container"></div>
+      <p class="empty" id="listsEmpty">No lists yet. Click <b>Create New List</b> to build collections like “Birthday”, “Townhall” or “Awards Night”.</p>
+    </section>
+
+    <footer class="footer muted">JACE BOOM BOX · Drop MP4 files into <code>/audio</code> and they appear automatically.</footer>
+  </div>
+
+  <!-- ================= MODAL ================= -->
+  <div class="modal-backdrop" id="modal" hidden>
+    <div class="modal panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle"></h3>
+      <p class="muted" id="modalSub"></p>
+      <div id="modalBody"></div>
+      <div class="modal-actions" id="modalActions"></div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <audio id="player" preload="auto"></audio>
+  <script src="js/app.js"></script>
+</body>
+</html>
