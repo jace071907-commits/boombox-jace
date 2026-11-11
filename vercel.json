@@ -2,14 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "",
-  "buildCommand": "python3 build.py",
+  "buildCommand": "python3 build.py --dist",
+  "outputDirectory": "public",
   "headers": [
     {
-      "source": "/audio/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
-    },
-    {
-      "source": "/audio/manifest.json",
+      "source": "/manifest.json",
       "headers": [{ "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }]
     }
   ]
