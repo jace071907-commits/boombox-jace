@@ -1,9 +1,11 @@
 """Scan the project folder for MP4 files and write manifest.json.
 
     python build.py           -> refresh manifest.json (used by server.py)
-    python build.py --dist    -> also copy the site into public/ (Vercel build)
+    python build.py --dist    -> also copy the site into public/
+On Vercel (VERCEL env var set) public/ is always generated.
 """
 import json
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -45,7 +47,6 @@ def dist(sounds: list[dict]) -> None:
 if __name__ == "__main__":
     sounds = build()
     print(f"[JACE BOOM BOX] {len(sounds)} sound(s) written to manifest.json")
-    if "--dist" in sys.argv:
+    if "--dist" in sys.argv or os.environ.get("VERCEL"):
         dist(sounds)
         print(f"[JACE BOOM BOX] site copied to {DIST.name}/")
-
